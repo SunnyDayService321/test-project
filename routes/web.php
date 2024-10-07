@@ -12,6 +12,7 @@ Route::get('/', function () {
 Route::get('/test', [TestController::class, 'test'])->name('test');
 
 Route::get('/post/create', [PostController::class, 'create'])->name('post.cteate');
+Route::get('/post', [PestController::class, 'store'])->name('post.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
