@@ -11,8 +11,12 @@ Route::get('/', function () {
 
 Route::get('/test', [TestController::class, 'test'])->name('test');
 
+// Route::resource('posts', PostController::class);
+// Route::resource('posts', PostController::class)->only(['index', 'create', 'store']);
 Route::get('/post/create', [PostController::class, 'create'])->name('post.cteate');
-Route::get('/post', [PestController::class, 'store'])->name('post.store');
+Route::post('/post', [PostController::class, 'store'])->name('post.store');
+Route::get('/post', [PostController::class, 'index'])->name('post.index');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
