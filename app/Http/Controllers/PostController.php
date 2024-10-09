@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -24,13 +23,15 @@ class PostController extends Controller
 
         $validated['user_id'] = auth()->id();
         $post = Post::create($validated);
-        $request->session()->flash('message', '保存しました');
-        return back();
+        return redirect()->route('post.index')->with('message', '保存しました');
+    //     $request->session()->flash('message', '保存しました');
+    //     return back();
     }
 
     public function index()
     {
-        $posts=Post::all();
+        // $posts=Post::all();
+        $posts=Post::paginate(10);
         return view('post.index', compact('posts'));
     }
 
@@ -45,10 +46,26 @@ class PostController extends Controller
         return view('post.edit', compact('post'));
     }
 
-    public function update($validated)
+    public function update(Request $request, Post $post)
     {
-        $request->sessin()->flash('message', '更新しました')
+        $validated = $request->validate([
+            'title' => 'required|max:20',
+            'body' => 'required|max:400',
+        ]);
+
+        $validated['user_id'] = auth()->id();
+
+        $post->update($validated);
+        $request->sessin()->flash('message', '更新しました');
         return back();
+    }
+
+    public function destroy(Request $request, post $post)
+    {
+        $post->delete();
+        return redirect()->route('post.index')->with('message', '投稿を削除しました');
+        // $request->session()->flash('message', '削除しました');
+        // return redirect('post');
     }
 }
 

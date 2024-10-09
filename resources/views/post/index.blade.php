@@ -6,6 +6,11 @@
     </x-slot>
 
     <div class="mx-auto px-6">
+        @if(session('message'))
+            <div class="text-red-600 font-bold">
+                {{session('message')}}
+            </div>    
+        @endif
         @foreach($posts as $post)
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
@@ -23,6 +28,9 @@
             </p>     
             </div>      
         </div>
-        @endforeach                
+        @endforeach
+        <div class="md-4">
+            {{ $posts->links() }}
+        </div>              
     </div>
 </x-app-layout>

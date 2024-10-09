@@ -62,9 +62,9 @@ class ProfileController extends Controller
     public function stre(Request $request)
     {
         $post = Post::create([
-            'title' => $request->taitle,
+            'title' => $request->title,
             'body' =>$request->body
-        ])
+        ]);
 
         return back();
     }

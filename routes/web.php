@@ -15,10 +15,11 @@ Route::get('/test', [TestController::class, 'test'])->name('test');
 // Route::resource('posts', PostController::class)->only(['index', 'create', 'store']);
 Route::get('/post/create', [PostController::class, 'create'])->name('post.cteate');
 Route::post('/post', [PostController::class, 'store'])->name('post.store');
-Route::get('/post', [PostController::class, 'index'])->name('post.index');
+Route::get('/post/index', [PostController::class, 'index'])->name('post.index');
 Route::get('/post/show/{id}', [PostController::class, 'show'])->name('post.show');
 Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
-Route::get('/post/{post}', [PostController::class, 'update'])->name('post.update');
+Route::patch('/post/{post}', [PostController::class, 'update'])->name('post.update');
+Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
