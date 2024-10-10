@@ -12,7 +12,7 @@
                     {{$post->title}}
                 </h1>
                 <div class="text-right flex">
-                    <a href="{{ route('post.edit', $post) }}">
+                    <a href="{{ route('post.edit', $post) }}" class="flex-1">
                         <x-primary-button>
                             編集
                         </x-primary-button>

@@ -21,11 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('test', function (User $user) {
-            if($user->id === 1) {
-            return true;
-            }
-            return false;
-            });
+        // Gate::define('test', function (User $user) {
+        //     if($user->id === 1) {
+        //     return true;
+        //     }
+        //     return false;
+        //     });
     }
 }

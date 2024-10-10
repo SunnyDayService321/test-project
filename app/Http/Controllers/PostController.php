@@ -15,7 +15,7 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        Gate::authorize('test');
+        // Gate::authorize('test');
         $validated = $request->validate([
             'title' => 'required|max:20',
             'body' => 'required|max:400',
@@ -56,8 +56,9 @@ class PostController extends Controller
         $validated['user_id'] = auth()->id();
 
         $post->update($validated);
-        $request->sessin()->flash('message', '更新しました');
-        return back();
+        // $request->session()->flash('message', '更新しました');
+        // return back();
+        return redirect()->route('post.index')->with('message', '更新しました');
     }
 
     public function destroy(Request $request, post $post)

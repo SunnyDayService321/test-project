@@ -14,6 +14,7 @@
         @foreach($posts as $post)
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
+                件名:
                 <a href="{{route('post.show', $post)}}"
                     {{$post->title}}
                 </a>    
