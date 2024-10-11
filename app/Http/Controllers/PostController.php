@@ -23,15 +23,15 @@ class PostController extends Controller
 
         $validated['user_id'] = auth()->id();
         $post = Post::create($validated);
-        return redirect()->route('post.index')->with('message', '保存しました');
-    //     $request->session()->flash('message', '保存しました');
-    //     return back();
+        // return redirect()->route('post.index')->with('message', '保存しました');
+        $request->session()->flash('message', '保存しました');
+        return back();
     }
 
     public function index()
     {
         // $posts=Post::all();
-        $posts=Post::paginate(10);
+        $posts=Post::paginate(5);
         return view('post.index', compact('posts'));
     }
 

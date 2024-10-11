@@ -13,21 +13,25 @@ Route::get('/test', [TestController::class, 'test'])->name('test');
 
 // Route::resource('posts', PostController::class);
 // Route::resource('posts', PostController::class)->only(['index', 'create', 'store']);
-Route::middleware(['auth', 'admin'])->group(function () {
+// Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/post', [PostController::class, 'index'])->name('post.index');
-    Route::get('/post/create', [PostController::class, 'create'])->name('post.cteate');
+    Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
-});
+// });
 
 
 Route::get('/post/show/{id}', [PostController::class, 'show'])->name('post.show');
 Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
 Route::patch('/post/{post}', [PostController::class, 'update'])->name('post.update');
 Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [PostController::class, 'index'])->middleware(['auth'])->name('dashboard');
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
