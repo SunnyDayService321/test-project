@@ -1,5 +1,7 @@
 FROM php:8.2-fpm
 
+CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80"] 
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -33,6 +35,8 @@ RUN composer install --no-interaction --no-dev --prefer-dist
 # Change ownership of our applications
 RUN chown -R www-data:www-data /var/www
 
-# Expose port 9000 and start php-fpm server
-EXPOSE 9000
-CMD ["php-fpm"]
+# # Expose port 9000 and start php-fpm server
+# EXPOSE 9000
+# CMD ["php-fpm"]
+EXPOSE 80
+CMD php artisan serve --host=0.0.0.0 --port=80
