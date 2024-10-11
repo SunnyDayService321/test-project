@@ -1,27 +1,38 @@
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
-# PHPの拡張機能をインストール
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
+    git \
+    curl \
     libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    libzip-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql zip
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
 
-# Composerのインストール
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+
+# Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www/html
+# Set working directory
+WORKDIR /var/www
 
-# アプリケーションファイルをコピー
-COPY . .
+# Increase memory limit
+RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
+# Copy existing application directory contents
+COPY . /var/www
 
-# 依存関係のインストール
+# Install dependencies
 RUN composer install --no-interaction --no-dev --prefer-dist
 
-# 権限の設定
-RUN chown -R www-data:www-data /var/www/html/storage
+# Change ownership of our applications
+RUN chown -R www-data:www-data /var/www
 
-# Apacheの設定（必要に応じて）
-RUN a2enmod rewrite
+# Expose port 9000 and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]
