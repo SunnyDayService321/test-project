@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80"] 
+# CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80"] 
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \

@@ -13,11 +13,11 @@ Route::get('/test', [TestController::class, 'test'])->name('test');
 
 // Route::resource('posts', PostController::class);
 // Route::resource('posts', PostController::class)->only(['index', 'create', 'store']);
-// Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/post', [PostController::class, 'index'])->name('post.index');
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
-// });
+});
 
 
 Route::get('/post/show/{id}', [PostController::class, 'show'])->name('post.show');
