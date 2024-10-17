@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 
 # CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80"] 
 
@@ -38,5 +38,23 @@ RUN chown -R www-data:www-data /var/www
 # # Expose port 9000 and start php-fpm server
 # EXPOSE 9000
 # CMD ["php-fpm"]
+EXPOSE 80
+CMD php artisan serve --host=0.0.0.0 --port=80
+
+# Copy composer.json and composer.lock
+COPY composer.json composer.lock ./
+
+# Install dependencies
+RUN composer install --no-scripts --no-autoloader --no-dev --prefer-dist
+
+# Copy existing application directory contents
+COPY . .
+
+# Generate optimized autoloader
+RUN composer dump-autoload --optimize
+
+# Change ownership of our applications
+RUN chown -R www-data:www-data /var/www
+
 EXPOSE 80
 CMD php artisan serve --host=0.0.0.0 --port=80
