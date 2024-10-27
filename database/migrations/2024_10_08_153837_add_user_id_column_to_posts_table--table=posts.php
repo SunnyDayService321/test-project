@@ -24,12 +24,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::table('posts', function (Blueprint $table) {
-        //     $table->dropForeign(['user_id']);
-        //     $table->dropColumn('user_id');
-        // });
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });
+        // Schema::create('posts', function (Blueprint $table) {
+        //     $table->dropColumn('user_id');
+        // });
     }
 };
