@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # FROM php:8.2-fpm
 
 # CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80"]
@@ -41,6 +42,11 @@
 # EXPOSE 80
 # CMD php artisan serve --host=0.0.0.0 --port=80
 FROM php:8.2-fpm
+=======
+FROM php:8.3-fpm
+
+# CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80"] 
+>>>>>>> 22eac4a735c7d140b7bb81379e0d125e45d822d4
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
