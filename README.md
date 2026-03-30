@@ -15,7 +15,7 @@ Docker環境で動作し、Laravel Breezeによる認証機能を備えていま
 
 ## 📁 ディレクトリ構成
 
-\```
+```
 laravel-todo-app/
 ├── app/          # モデル・コントローラー・ミドルウェア
 ├── bootstrap/    # アプリケーション起動設定
@@ -30,32 +30,32 @@ laravel-todo-app/
 ├── Dockerfile
 ├── docker-compose.yml
 └── README.md
-\```
+```
 
 ## 🚀 セットアップ手順（Docker）
 
 ### 1. リポジトリをクローン
 
-\```bash
+```bash
 git clone https://github.com/SunnyDayService321/laravel-todo-app.git
 cd laravel-todo-app
-\```
+```
 
 ### 2. 環境変数ファイルを作成
 
-\```bash
+```bash
 cp .env.example .env
-\```
+```
 
 ### 3. Dockerコンテナを起動
 
-\```bash
+```bash
 docker-compose up -d --build
-\```
+```
 
 ### 4. コンテナ内で初期セットアップ
 
-\```bash
+```bash
 docker-compose exec app bash
 
 # アプリケーションキーを生成
@@ -66,15 +66,15 @@ php artisan migrate
 
 # （必要に応じて）シーダーを実行
 php artisan db:seed
-\```
+```
 
 ブラウザで http://localhost にアクセスしてください。
 
 ## 🧪 テストの実行
 
-\```bash
+```bash
 php artisan test
-\```
+```
 
 ## 📋 主な機能
 
